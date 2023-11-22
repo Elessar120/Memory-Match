@@ -1,26 +1,15 @@
-﻿using System;
-using Enum;
+﻿using Enum;
 using UnityEngine;
-
-namespace DefaultNamespace
-{
     public class AnimationController : MonoBehaviour
     {
-        private Animator animator;
-
         public void StartFlipping(Animator animator)
         {
-            this.animator = animator;
-            animator.SetBool("isFlipping", true);
-            Debug.Log(animator.name);
-
+            animator.SetBool(GameManager.Instance.flipAnimationName, true);
         }
 
         public void StartFlippingBack(Animator animator)
         {
-            Debug.Log(Time.time);
-            this.animator = animator;
-            animator.SetBool("isFlipping", false);// todo: write animation parameter name in separate script
+            animator.SetBool(GameManager.Instance.flipAnimationName, false);
         }
 
         public void OnFlipFinished()
@@ -35,7 +24,7 @@ namespace DefaultNamespace
         }
         public void RunShrinkingAnimation(Animator animator)
         {
-            animator.SetTrigger("isShrinking");// todo: set string name in inspector
+            animator.SetTrigger(GameManager.Instance.shrinkAnimationName);
         }
 
         public void OnShrinkFinished()
@@ -44,4 +33,3 @@ namespace DefaultNamespace
             GameManager.Instance.ChangeGameState(GameState.WaitingForInput);
         }
     }
-}

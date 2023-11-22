@@ -811,13 +811,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a63543dee6546d3a96c9dd22952646a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flipAnimationName: isFlipping
+  shrinkAnimationName: isShrinking
   gameState: 0
   levelManager: {fileID: 735829408}
-  selectedCards: []
-  gameTimer: {fileID: 1757477834}
+  gameTimeManager: {fileID: 1757477834}
   animationController: {fileID: 6500698336289099167, guid: 84b994c0d6ebc2842a3096855c92ae73,
     type: 3}
   delayEndGamePopup: 0.5
+  delayDestroyingCard: 0.5
+  selectedCards: []
 --- !u!4 &594815444
 Transform:
   m_ObjectHideFlags: 0
@@ -827,7 +830,7 @@ Transform:
   m_GameObject: {fileID: 594815442}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 655.9593, y: 922.8644, z: -314.27493}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -863,7 +866,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridLayoutGroup: {fileID: 1566145993}
-  gameTimer: {fileID: 1757477834}
   levels:
   - {fileID: 11400000, guid: a13e75f6f8577504592fcb6209fa840e, type: 2}
   - {fileID: 11400000, guid: f850847e85db49345afa4ae64696721b, type: 2}
@@ -877,7 +879,7 @@ Transform:
   m_GameObject: {fileID: 735829407}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 655.9593, y: 922.8644, z: -314.27493}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1492,7 +1494,7 @@ GameObject:
   - component: {fileID: 1757477833}
   - component: {fileID: 1757477834}
   m_Layer: 0
-  m_Name: Memory Match Timer
+  m_Name: Memory Match Time Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1507,7 +1509,7 @@ Transform:
   m_GameObject: {fileID: 1757477832}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1307.9474, y: 818.2885, z: 0.6722107}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1525,7 +1527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1a61f1e86e84d9fa3a496a8d5f29428, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalTime: 60
+  totalTime: 30
 --- !u!1 &1788888238
 GameObject:
   m_ObjectHideFlags: 0
@@ -2097,12 +2099,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2168ae9500494acfbd815e02fb39c9fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameTimer: {fileID: 1757477834}
+  gameTimeManager: {fileID: 1757477834}
   winGamePopup: {fileID: 1327187753}
   looseGamePopup: {fileID: 75753461}
   endGameMainPanel: {fileID: 885312651}
   LevelManager: {fileID: 735829408}
-  selectedLevel: 0
+  selectedLevel: 1
   timerText: {fileID: 757180272}
 --- !u!4 &2061219997
 Transform:
@@ -2113,7 +2115,7 @@ Transform:
   m_GameObject: {fileID: 2061219995}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1307.9474, y: 818.2885, z: 0.6722107}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

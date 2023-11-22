@@ -1,11 +1,6 @@
 ﻿using System;
 using UnityEngine;
-
-namespace DefaultNamespace
-{
-    using UnityEngine;
-
-    public class Timer : MonoBehaviour
+    public class TimeManager : MonoBehaviour
     {
         public float totalTime = 60f; // Total time for the timer in seconds
         private float currentTime;
@@ -16,7 +11,7 @@ namespace DefaultNamespace
         private void Start()
         {
             currentTime = totalTime;
-            LevelManager.Instance.OnWinLevel += StopTimer;
+            LevelManager.Instance.onWinLevel += StopTimer;
         }
 
         private void Update()
@@ -68,5 +63,3 @@ namespace DefaultNamespace
             return isTimerRunning;
         }
     }
-
-}

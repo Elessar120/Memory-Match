@@ -1,13 +1,7 @@
-﻿// LevelEditorWindow.cs
-
-using System;
-using System.Collections.Generic;
-using DefaultNamespace;
+﻿using System.Collections.Generic;
 using ScriptableObjects;
 using UnityEditor;
 using UnityEngine;
-using CardData = DefaultNamespace.Data.CardData;
-
 public class LevelEditorWindow : EditorWindow
 {
     private LevelData levelData;
@@ -27,7 +21,7 @@ public class LevelEditorWindow : EditorWindow
     private Sprite[] cardsFront;
     private Vector2 scrollPosition;
     private GameObject cardPrefab;
-    private string levelIndexInput = "1"; // Default to level 1
+    private int levelIndexInput = 1; // Default to level 1
 
 
     [MenuItem("Window/Level Editor")]
@@ -39,10 +33,8 @@ public class LevelEditorWindow : EditorWindow
     private void OnGUI()
     {
         scrollPosition = GUILayout.BeginScrollView(scrollPosition);
-
         GUILayout.Label("Level Editor", EditorStyles.boldLabel);
         itemsNumber = EditorGUILayout.IntField("itemsNumber", itemsNumber);
-        //levelData = EditorGUILayout.ObjectField("Level Data", levelData, typeof(LevelData), false) as LevelData;
         levelData = LoadScriptableObject();
         cardPrefab = EditorGUILayout.ObjectField("cardPrefab", cardPrefab, typeof(GameObject), false) as GameObject;
         EditorGUILayout.LabelField("cardFront Image", EditorStyles.boldLabel);
@@ -65,15 +57,12 @@ public class LevelEditorWindow : EditorWindow
 
         EditorGUILayout.LabelField("cardsBack Image", EditorStyles.boldLabel);
         cardsBack = EditorGUILayout.ObjectField("cardsBack ", cardsBack, typeof(Sprite), true) as Sprite;
-
-        // Select or create a LevelDataScriptableObject
-
-        // Input fields for rows and columns
+        
         rows = EditorGUILayout.IntField("Rows", rows);
         matchCount = EditorGUILayout.IntField("matchCount", matchCount);
         levelNumber = EditorGUILayout.IntField("levelNumber", levelNumber);
+        
         EditorGUILayout.LabelField("Padding", EditorStyles.boldLabel);
-
         left = EditorGUILayout.IntField("Left", left);
         right = EditorGUILayout.IntField("Right", right);
         top = EditorGUILayout.IntField("Top", top);
@@ -81,10 +70,8 @@ public class LevelEditorWindow : EditorWindow
 
         EditorGUILayout.LabelField("Spacing", EditorStyles.boldLabel);
         GUILayout.BeginHorizontal();
-
         spacingX = EditorGUILayout.IntField("X", spacingX);
         spacingY = EditorGUILayout.IntField("Y", spacingY);
-
         GUILayout.EndHorizontal();
 
         EditorGUILayout.LabelField("Card Size", EditorStyles.boldLabel);
@@ -100,32 +87,12 @@ public class LevelEditorWindow : EditorWindow
         }
 
         // Input field for the desired level index
-        levelIndexInput = EditorGUILayout.TextField("Desired Level Index", levelIndexInput);
+        levelIndexInput = EditorGUILayout.IntField("Desired Level Index", levelIndexInput);
 
-        // Button to test the current level
+        // Button to test the desired level
         if (GUILayout.Button("Test Level"))
         {
-            // Parse the input string to get the desired level index
-            if (int.TryParse(levelIndexInput, out int desiredLevelIndex))
-            {
-                // Load the level from Resources/Levels
-                //LevelData levelToTest = LoadLevel(desiredLevelIndex);
-
-                // Check if the level is successfully loaded
-                //if (levelToTest != null)
-                //{
-                    // Test the loaded level
-                    TestLevel(desiredLevelIndex);
-               // }
-               // else
-              //  {
-              //      Debug.LogWarning("Failed to load the specified level.");
-              //  }
-            }
-            else
-            {
-                Debug.LogError("Invalid level index. Please enter a valid integer.");
-            }
+            TestLevel(levelIndexInput);
         }
         // Button to clear tested level
         if (GUILayout.Button("CLear Scene"))
@@ -210,17 +177,7 @@ public class LevelEditorWindow : EditorWindow
         LevelData level = AssetDatabase.LoadAssetAtPath<LevelData>(assetPath);
         return level;
     }
-
-    private LevelData LoadLevel(int levelIndex)
-    {
-        // Load the level from Resources/Levels
-        string levelPath = "Levels/Level " + levelIndex;
-        Debug.Log(levelIndex);
-        LevelData level = Resources.Load<LevelData>(levelPath);
-        Debug.Log(level.name);
-        return level;
-    }
-
+    
     private void TestLevel(int level)
     {
             LevelManager levelManager = FindObjectOfType<LevelManager>();
@@ -232,7 +189,5 @@ public class LevelEditorWindow : EditorWindow
             {
                 Debug.LogWarning("LevelManager not found in the scene.");
             }
-        
-     
     }
 }

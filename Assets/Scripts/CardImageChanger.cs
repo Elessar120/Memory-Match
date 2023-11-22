@@ -1,8 +1,4 @@
-﻿using System;
-using UnityEngine;
-
-namespace DefaultNamespace
-{
+﻿using UnityEngine;
     public class CardImageChanger : MonoBehaviour
     {
         private Card card;
@@ -14,10 +10,9 @@ namespace DefaultNamespace
 
         public void ChangeImage()           
         {
-            if (GetComponent<Animator>().GetBool("isFlipping"))
+            if (GetComponent<Animator>().GetBool(GameManager.Instance.flipAnimationName))
             {
                 card.image.sprite = card.sprite;
-                
             }
             else
             {
@@ -25,4 +20,3 @@ namespace DefaultNamespace
             }
         }
     }
-}

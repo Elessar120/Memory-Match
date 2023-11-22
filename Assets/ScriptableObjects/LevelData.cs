@@ -24,7 +24,7 @@ namespace ScriptableObjects
         [Header("Cell Size")] 
         public int width;
         public int height;
-        public List<DefaultNamespace.Data.CardData> cards;
+        public List<CardData> cards;
 
     }
 }

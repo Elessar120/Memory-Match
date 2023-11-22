@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
-
-namespace DefaultNamespace
-{
-    public class UIManager : MonoBehaviour
+public class UIManager : MonoBehaviour
     {
-        [SerializeField] Timer gameTimer;
+        [SerializeField] TimeManager gameTimeManager;
         [SerializeField] GameObject winGamePopup;
         [SerializeField] GameObject looseGamePopup;
         [SerializeField] GameObject endGameMainPanel;
         [SerializeField] LevelManager LevelManager;
-        [HideInInspector] public int selectedLevel = 1;
+        public int selectedLevel = 1;
         private static UIManager instance;
 
         public static UIManager Instance => instance;
@@ -26,14 +19,14 @@ namespace DefaultNamespace
             {
                 instance = this;
             }
-
-            selectedLevel = 1;
         }
 
         private void Start()
         {
-            gameTimer.OnTimerExpired += ShowEndGameLoosePopUp;
-            LevelManager.OnWinLevel += ShowEndGameWinPopUp;
+            gameTimeManager.OnTimerExpired += ShowEndGameLoosePopUp;
+            LevelManager.onWinLevel += ShowEndGameWinPopUp;
+            LevelManager.Instance.Init(selectedLevel);
+
         }
         private void ShowEndGameLoosePopUp()
         {
@@ -72,8 +65,7 @@ namespace DefaultNamespace
 
         private void OnDestroy()
         {
-            gameTimer.OnTimerExpired -= () => ShowEndGameLoosePopUp();
-            LevelManager.OnWinLevel -= ShowEndGameWinPopUp;
+            gameTimeManager.OnTimerExpired -= () => ShowEndGameLoosePopUp();
+            LevelManager.onWinLevel -= ShowEndGameWinPopUp;
         }
     }
-}

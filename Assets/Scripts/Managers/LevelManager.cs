@@ -3,25 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using ScriptableObjects;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
-using CardData = DefaultNamespace.Data.CardData;
-using Random = UnityEngine.Random;
 
-namespace DefaultNamespace
-{
     [ExecuteInEditMode] // This attribute allows the script to run in Edit mode
     public class LevelManager : MonoBehaviour
     {
         public GridLayoutGroup gridLayoutGroup;
         private static LevelManager instance; 
         public static LevelManager Instance => instance;
-        public Timer gameTimer;
         public LevelData[] levels;
         public Transform spawnPoint;
-        public Action OnWinLevel;
-        private int totalPossibleMatches;// todo: choose a better name
+        public Action onWinLevel;
+        private int totalPossibleMatches;// in most memory games you should match 2 cards, but I decided make it variable not constant
         private void Awake()
         {
             if (instance == null)
@@ -36,16 +30,10 @@ namespace DefaultNamespace
 
     // Load levels from Resources/Levels folder
     levels = Resources.LoadAll("Levels", typeof(LevelData)).Cast<LevelData>().ToArray();
-    Debug.Log(levels.Length);
 
     // Create a list to hold the cards
     List<CardData> cards = new List<CardData>();
     cards = levels[levelIndex].cards;
-
-    // Create a list to hold the shuffled cards
-    List<CardData> shuffledCards = new List<CardData>();
-// Assuming you have a List<CardData> named cards
-  
 
     Vector2 cellSize = gridLayoutGroup.cellSize;
     cellSize.x = levels[levelIndex].width;
@@ -77,9 +65,7 @@ namespace DefaultNamespace
     {
         n--;
         int k = rng.Next(n + 1);
-        int value = indexes[k];
-        indexes[k] = indexes[n];
-        indexes[n] = value;
+        (indexes[k], indexes[n]) = (indexes[n], indexes[k]);
     }
 
 // Instantiate the cards
@@ -108,7 +94,6 @@ namespace DefaultNamespace
         public void WinCheck()
         {
             totalPossibleMatches--;
-            Debug.Log(totalPossibleMatches);
             if (totalPossibleMatches == 0)
             {
                 StartCoroutine(Delay(GameManager.Instance.delayEndGamePopup));
@@ -118,7 +103,6 @@ namespace DefaultNamespace
         IEnumerator Delay(float delayTime)
         {
             yield return new WaitForSeconds(delayTime);
-            OnWinLevel();
+            onWinLevel();
         }
     }
-}
