@@ -12,6 +12,8 @@ Level Editor:
 
 •  After testing the level, you can clear the scene by pressing the "Clear Scene" button.
 
+![Memory Match - SampleScene - Windows, Mac, Linux - Unity 2022 3 13f1 _DX11_ 11_22_2023 3_36_15 AM](https://github.com/Elessar120/Memory-Match/assets/49751850/526e15d2-040f-4ef3-8228-87e0abeae013)
+
 Add New Levels:
 •  This game only has one level, but with the level editor, you can create as many as you need. You just need to add buttons to your main menu and assign the method "Set Selected Level" from the class "UI Manager" to them. Then, the player can select the created levels and start playing!
 
