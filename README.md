@@ -1,5 +1,5 @@
 Memory Match
-Funtory Unity 3D Test
+Unity 3D Test
 
 Hello! This is a short guide.
 
