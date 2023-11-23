@@ -1,4 +1,5 @@
 ﻿using Enum;
+using Managers;
 using UnityEngine;
 
 public class AnimationController : MonoBehaviour
