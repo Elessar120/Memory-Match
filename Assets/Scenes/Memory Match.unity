@@ -814,7 +814,6 @@ MonoBehaviour:
   flipAnimationName: isFlipping
   shrinkAnimationName: isShrinking
   gameState: 0
-  levelManager: {fileID: 735829408}
   gameTimeManager: {fileID: 1757477834}
   animationController: {fileID: 6500698336289099167, guid: 84b994c0d6ebc2842a3096855c92ae73,
     type: 3}
@@ -869,6 +868,7 @@ MonoBehaviour:
   levels:
   - {fileID: 11400000, guid: a13e75f6f8577504592fcb6209fa840e, type: 2}
   - {fileID: 11400000, guid: f850847e85db49345afa4ae64696721b, type: 2}
+  - {fileID: 11400000, guid: 113c23efdaec5f341afddb3857af38b5, type: 2}
   spawnPoint: {fileID: 1566145992}
 --- !u!4 &735829409
 Transform:
@@ -1472,15 +1472,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 100
-    m_Right: 100
-    m_Top: 100
-    m_Bottom: 100
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 200, y: 300}
-  m_Spacing: {x: 200, y: 200}
+  m_CellSize: {x: 300, y: 300}
+  m_Spacing: {x: 0, y: 0}
   m_Constraint: 2
   m_ConstraintCount: 2
 --- !u!1 &1757477832
@@ -2103,8 +2103,7 @@ MonoBehaviour:
   winGamePopup: {fileID: 1327187753}
   looseGamePopup: {fileID: 75753461}
   endGameMainPanel: {fileID: 885312651}
-  LevelManager: {fileID: 735829408}
-  selectedLevel: 1
+  selectedLevel: 5
   timerText: {fileID: 757180272}
 --- !u!4 &2061219997
 Transform:

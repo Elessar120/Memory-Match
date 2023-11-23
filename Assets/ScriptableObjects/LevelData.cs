@@ -1,14 +1,12 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
-
 namespace ScriptableObjects
 {
     [CreateAssetMenu(fileName = "NewLevel", menuName = "Level", order = 0)]
     public class LevelData : ScriptableObject
     {
         public int itemsNumber;
-        [FormerlySerializedAs("matchableCount")] public int matchCount = 2;
+        public int matchCount = 2;
         public int desiredRows; 
         public GameObject card;
         [Header("spacing Settings")]

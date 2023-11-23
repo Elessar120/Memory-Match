@@ -7,9 +7,12 @@
         {
             if (GameManager.Instance.selectedCards.Count < LevelManager.Instance.levels[UIManager.Instance.selectedLevel - 1].matchCount)
             {
-                Card card = eventData.pointerClick.GetComponent<Card>();
-                GameManager.Instance.gameState = GameState.ResolvingMatch;
-                GameManager.Instance.Flip(card);
+                if (GameManager.Instance.gameState != GameState.GameOver)
+                {
+                    Card card = eventData.pointerClick.GetComponent<Card>();
+                    GameManager.Instance.ChangeGameState(GameState.ResolvingMatch);
+                    GameManager.Instance.Flip(card);
+                }
             }
                
         }
