@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Enum;
+using Interface;
 using UnityEngine;
 
 namespace Managers
@@ -10,9 +11,8 @@ namespace Managers
         public string shrinkAnimationName;
         public GameState gameState;
         public TimeManager gameTimeManager;
-        public UIManager uiManager;
 
-        public AnimationController animationController;
+        private IAnimation animationInstance;
         public float delayEndGamePopup = 0.5f;
         public float delayDestroyingCard = 0.5f;
         [HideInInspector] public List<Card> selectedCards = new List<Card>();
@@ -31,8 +31,6 @@ namespace Managers
 
         private void Start()
         {
-            uiManager.Initialize();
-            gameTimeManager.Initialize(uiManager);
             ChangeGameState(GameState.WaitingForInput);
 
             // Subscribe to the timer expired event
@@ -61,9 +59,11 @@ namespace Managers
                         LevelManager.Instance.WinCheck();
                     }
                     else
-                    {
-                        animationController.StartFlippingBack(selectedCards[0].GetComponent<Animator>());
-                        animationController.StartFlippingBack(selectedCards[1].GetComponent<Animator>());
+                    {   
+                        animationInstance = selectedCards[0].GetComponent<IAnimation>();
+                        animationInstance.StartFlippingBack(selectedCards[0].GetComponent<Animator>());
+                        animationInstance = selectedCards[1].GetComponent<IAnimation>();
+                        animationInstance.StartFlippingBack(selectedCards[1].GetComponent<Animator>());
                     }
 
                     selectedCards.Clear();
@@ -82,14 +82,16 @@ namespace Managers
 
         public void Flip(Card selectedCard)
         {
-            animationController.StartFlipping(selectedCard.GetComponent<Animator>());
+            animationInstance = selectedCard.GetComponent<IAnimation>();
+            animationInstance.StartFlipping(selectedCard.GetComponent<Animator>());
         }
 
         private void StartShrinking()
         {
             foreach (Card card in selectedCards)
             {
-                animationController.RunShrinkingAnimation(card.GetComponent<Animator>());
+                animationInstance = card.GetComponent<IAnimation>();
+                animationInstance.RunShrinkingAnimation(card.GetComponent<Animator>());
             }
         }
 

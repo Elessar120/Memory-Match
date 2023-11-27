@@ -1,4 +1,5 @@
 ﻿using System;
+using Interface;
 using UnityEngine;
 
 namespace Managers
@@ -7,17 +8,14 @@ namespace Managers
     {
         [SerializeField] private float totalTime = 60f; // Total time for the timer in seconds
         private float currentTime;
-
         private bool isTimerRunning;
-        private UIManager uiManager; // Injected dependency
-
         public Action OnTimerExpired;
-
-        public void Initialize(UIManager manager)
+        private IUpdateUI UIInstance;
+        public void Start()
         {
-            uiManager = manager;
             currentTime = totalTime;
             LevelManager.Instance.onWinLevel += StopTimer;
+            UIInstance = FindObjectOfType<UIManager>();
         }
         private void Update()
         {
@@ -30,12 +28,12 @@ namespace Managers
         private void UpdateTimer()
         {
             currentTime -= Time.deltaTime;
-            uiManager.UpdateUIText(currentTime);
+            UIInstance.UpdateUIText(currentTime);
         
             if (currentTime <= 0f)
             {
                 currentTime = 0f;
-                uiManager.UpdateUIText(currentTime);
+                UIInstance.UpdateUIText(currentTime);
                 StopTimer();
 
                 // Trigger event or perform actions when the timer expires

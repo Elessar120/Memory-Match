@@ -1,9 +1,10 @@
-﻿using TMPro;
+﻿using Interface;
+using TMPro;
 using UnityEngine;
 
 namespace Managers
 {
-    public class UIManager : MonoBehaviour
+    public class UIManager : MonoBehaviour, IUpdateUI
     {
         [SerializeField] private TimeManager gameTimeManager;
         [SerializeField] private GameObject winGamePopup;
@@ -12,7 +13,7 @@ namespace Managers
         [SerializeField] private TextMeshProUGUI timerText;
 
         public int selectedLevel = 1;
-        public void Initialize()
+        public void Start()
         {
             gameTimeManager.OnTimerExpired += ShowEndGameLoosePopUp;
             LevelManager.Instance.onWinLevel += ShowEndGameWinPopUp;

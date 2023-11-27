@@ -6,15 +6,17 @@
     {
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (GameManager.Instance.selectedCards.Count < LevelManager.Instance.levels[GameManager.Instance.uiManager.selectedLevel - 1].matchCount)
-            {
-                if (GameManager.Instance.gameState != GameState.GameOver)
-                {
-                    Card card = eventData.pointerClick.GetComponent<Card>();
-                    GameManager.Instance.ChangeGameState(GameState.ResolvingMatch);
-                    GameManager.Instance.Flip(card);
-                }
-            }
+            if (GameManager.Instance.selectedCards.Count >= 2)
+                return;
+            
+            if (GameManager.Instance.gameState == GameState.GameOver)
+                return;
+            
+            Card card = eventData.pointerClick.GetComponent<Card>();
+            GameManager.Instance.ChangeGameState(GameState.ResolvingMatch);
+            GameManager.Instance.Flip(card);
+                
+            
                
         }
     }

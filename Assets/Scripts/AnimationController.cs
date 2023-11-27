@@ -1,8 +1,9 @@
 ﻿using Enum;
+using Interface;
 using Managers;
 using UnityEngine;
 
-public class AnimationController : MonoBehaviour
+public class AnimationController : MonoBehaviour, IAnimation
 {
     public void StartFlipping(Animator animator)
     {
